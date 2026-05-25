@@ -14,14 +14,15 @@ jobs:
     - name: Checkout do código
       uses: actions/checkout@v3
 
-    - name: Instalar pip
-      run: sudo apt install -y python3-pip
-      
-    - name: Instalar dependências
+    - name: Instalar dependências do sistema
+      run: sudo apt install -y python3-venv python3-full
+
+    - name: Criar ambiente virtual e instalar dependências
       run: |
-        python3 -m pip install --upgrade pip
-        pip3 install -r requirements.txt
+        python3 -m venv venv
+        venv/bin/pip install --upgrade pip
+        venv/bin/pip install -r requirements.txt
         
     - name: Executar testes com pytest
       run: |
-        pytest test_calculadora.py -v --tb=short
+        venv/bin/pytest test_calculadora.py -v --tb=short
