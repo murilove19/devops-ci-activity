@@ -13,11 +13,14 @@ jobs:
     steps:
     - name: Checkout do código
       uses: actions/checkout@v3
+
+    - name: Instalar pip
+      run: sudo apt install -y python3-pip
       
     - name: Instalar dependências
       run: |
         python3 -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip3 install -r requirements.txt
         
     - name: Executar testes com pytest
       run: |
